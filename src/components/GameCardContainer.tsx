@@ -12,7 +12,7 @@ interface Props {
 export function GameCardContainer({ children }: Props) {
   // overflow="hidden" -> Card의 borderRadius를 이미지에 적용
   return (
-    <Box width="300px" borderRadius={10} overflow="hidden">
+    <Box borderRadius={10} overflow="hidden">
       {children}
     </Box>
   );
