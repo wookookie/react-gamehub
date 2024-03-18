@@ -1,9 +1,12 @@
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 import { useGenres } from "../hooks/useGenres";
 import { getCroppedImageUrl } from "../services/image-url";
 
 export function GenreList() {
-  const { data } = useGenres();
+  const { data, error, isLoading } = useGenres();
+
+  if (error) return null; // 오류가 발생할 경우 리스트를 표시하지 않음
+  if (isLoading) return <Spinner />;
 
   return (
     <List>
