@@ -3,10 +3,11 @@ import { Genre, useGenres } from "../hooks/useGenres";
 import { getCroppedImageUrl } from "../services/image-url";
 
 interface Props {
+  selectedGenre: Genre | null;
   onSelectGenre: (genre: Genre) => void;
 }
 
-export function GenreList({ onSelectGenre }: Props) {
+export function GenreList({ selectedGenre, onSelectGenre }: Props) {
   const { data, error, isLoading } = useGenres();
 
   if (error) return null; // 오류가 발생할 경우 리스트를 표시하지 않음
@@ -18,7 +19,12 @@ export function GenreList({ onSelectGenre }: Props) {
         <ListItem key={genre.id} paddingY="5px">
           <HStack>
             <Image boxSize="32px" borderRadius={8} src={getCroppedImageUrl(genre.image_background)} />
-            <Button fontSize="lg" variant="link" onClick={() => onSelectGenre(genre)}>
+            <Button
+              variant="link"
+              fontSize="lg"
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+              onClick={() => onSelectGenre(genre)}
+            >
               {genre.name}
             </Button>
           </HStack>
