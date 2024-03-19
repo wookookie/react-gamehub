@@ -3,9 +3,14 @@ import { GameCard } from "./GameCard";
 import { GameCardContainer } from "./GameCardContainer";
 import { GameCardSkeleton } from "./GameCardSkeleton";
 import { useGames } from "../hooks/useGames";
+import { Genre } from "../hooks/useGenres";
 
-export function GameGrid() {
-  const { data, error, isLoading } = useGames();
+interface Props {
+  selectedGenre: Genre | null;
+}
+
+export function GameGrid({ selectedGenre }: Props) {
+  const { data, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   // columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} -> 화면 크기에 따른 열 표시 개수 지정
